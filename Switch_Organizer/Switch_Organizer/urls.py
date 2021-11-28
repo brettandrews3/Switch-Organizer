@@ -21,3 +21,10 @@ urlpatterns = [
     path('organizer/', include('organizer.urls')),
     path('admin/', admin.site.urls),
 ]
+
+
+"""
+TODO:
+11/28/2021: Next up: setup the database with Django documentation,
+part 2.
+"""
