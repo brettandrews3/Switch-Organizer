@@ -12,12 +12,24 @@ class VideoGame(models.Model):
 	genre = models.CharField(max_length=200)
 	game_console = models.CharField(max_length=50)
 
-class Choice(models.Model):
+class Review(models.Model):
 	"""TODO: This class will allow for reviews and ratings by the time of project
 	completion. Users will be able to save their thoughts on the game and rate
 	the game on a scale of 1-10. For this initial code draft, I'm using the 
 	Django poll tutorial's fields as placeholders while I figure this out.
 	"""
-	question = models.ForeignKey(Question, on_delete=models.CASCADE)
+	game = models.ForeignKey(VideoGame, on_delete=models.CASCADE)
+	review_text = models.CharField(max_length=1000)
+	rating = models.IntegerField(default=0)
+
+"""
+class Choice(models.Model):
+	TODO: This class will allow for reviews and ratings by the time of project
+	completion. Users will be able to save their thoughts on the game and rate
+	the game on a scale of 1-10. For this initial code draft, I'm using the 
+	Django poll tutorial's fields as placeholders while I figure this out.
+	
+	question = models.ForeignKey(VideoGame, on_delete=models.CASCADE)
 	choice_text = models.CharField(max_length=1000)
 	votes = models.IntegerField(default=0)
+"""
