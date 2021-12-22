@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.utils import timezone
 
@@ -11,10 +13,10 @@ class VideoGame(models.Model):
 	game_name = models.CharField(max_length=200)
 	#release_date = models.DateTimeField('date released')
 	release_date = models.CharField(max_length=10)
-	pub_date = models.DateTimeField('date added to organizer')
+	#pub_date = models.DateTimeField('date added to organizer', default=NULL)
 	publisher = models.CharField(max_length=50)
 	genre = models.CharField(max_length=200)
-	game_console = models.CharField(max_length=50)
+	game_console = models.CharField(max_length=50, default="Switch")
 	def __str__(self):
 		return self.game_name
 	def was_published_recently(self):
