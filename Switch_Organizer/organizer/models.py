@@ -14,6 +14,7 @@ class VideoGame(models.Model):
 	#release_date = models.DateTimeField('date released')
 	release_date = models.CharField(max_length=10)
 	#pub_date = models.DateTimeField('date added to organizer', default=NULL)
+	developer = models.CharField(max_length=50, default='NULL')
 	publisher = models.CharField(max_length=50)
 	genre = models.CharField(max_length=200)
 	game_console = models.CharField(max_length=50, default="Switch")
