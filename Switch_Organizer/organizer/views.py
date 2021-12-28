@@ -12,14 +12,15 @@ def index(request):
 	context = {'latest_games_added': latest_games_added}
 	return render(request, 'organizer/index.html', context)
 	#return HttpResponse(template.render(context, request))
-	# output = ', '.join([v.game_name for v in latest_games_added])
-	# return HttpResponse(output)
-	# return HttpResponse("Hello, friendo. You're at the organizer index.")
+	#output = ', '.join([v.game_name for v in latest_games_added])
+	#return HttpResponse(output)
+	#return HttpResponse("Hello, friendo. You're at the organizer index.")
 
 
 # Here's the standardized HttpResponses for urlpatterns in urls.py:
 def detail(request, game_id):
-	return HttpResponse("You're looking at game %s." % game_id)
+	game = get_object_or_404(VideoGame, pk=game_id)
+	return render(request, 'organizer/detail.html', {'game': game})
 
 def results(request, game_id):
 	response = "You're looking at the results of game %s."

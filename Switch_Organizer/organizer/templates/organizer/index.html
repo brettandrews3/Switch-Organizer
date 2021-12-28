@@ -1,7 +1,7 @@
 {% if latest_games_added %}
 	<ul>
 		{% for game in latest_games_list %}
-			<li><a href="/organizer/{{ game.id }}/">{{ game.game_name }}</a></li>
+			<li><a href="{% url 'detail' game.id %}">{{ game.game_name }}</a></li>
 		{% endfor % }
 	</ul>
 {% else %}

@@ -1,0 +1,6 @@
+<h1>{{ game.game_name }}</h1>
+<ul>
+	{% for review in game.review_set.all %}
+		<li>{{ review.review_text }}</li>
+	{% endfor %}
+</ul>
