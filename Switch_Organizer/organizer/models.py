@@ -11,7 +11,6 @@ class VideoGame(models.Model):
 	used throughout Django's admin section.
 	"""
 	game_name = models.CharField(max_length=200)
-	#release_date = models.DateTimeField('date released')
 	release_date = models.CharField(max_length=10, default='yyyy/mm/dd')
 	pub_date = models.DateTimeField('date added to organizer', default=timezone.now)
 	developer = models.CharField(max_length=50, default='NULL')
