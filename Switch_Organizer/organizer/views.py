@@ -6,7 +6,10 @@ from django.http import HttpResponse
 def index(request):
 	"""This function creates the index for the organizer app.
 	"""
-	return HttpResponse("Hello, friendo. You're at the organizer index.")
+	latest_games_added = VideoGame.objects.order_by('-pub_date')[:5]
+	output = ', '.join([v.game_name for v in latest_games_added])
+	return HttpResponse(output)
+	# return HttpResponse("Hello, friendo. You're at the organizer index.")
 
 # Here's the standardized HttpResponses for urlpatterns in urls.py:
 
