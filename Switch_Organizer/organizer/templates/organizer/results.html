@@ -1,0 +1,10 @@
+<h1>{{ game.game_text }}</h1>
+
+<ul>
+	{% for review in game.review_set.all %}
+		<li>{{ review.review_text }} -- {{ review.recommends }} recommend{{ review.recommends|pluralize }}
+		</li>
+	{% endfor %}
+</ul>
+
+<a href="{% url 'organizer.detail' game.id %}">Vote again?</a>
