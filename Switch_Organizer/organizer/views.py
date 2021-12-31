@@ -1,14 +1,29 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.views import generic
 
 from .models import VideoGame
 
 # Create your views here.
 
+class IndexView(generic.ListView):
+	template_name = 'organizer/index.html'
+	context_object_name = 'latest_games_added'
+
+	def get_queryset(self):
+		return VideoGame.objects.order_by('-pub_date')[:5]
+
+class DetailView(generic.DetailView):
+	model = VideoGame
+	template_name = 'organizer/details.html'
+
+class ResultsView(generic.DetailView):
+	model = VideoGame
+	template_name = 'organizer/results.html'
+
+"""
 def index(request):
-	"""This function creates the index for the organizer app.
-	"""
 	latest_games_added = VideoGame.objects.order_by('-pub_date')[:5]
 	template = loader.get_template('organizer/index.html')
 	context = {'latest_games_added': latest_games_added}
@@ -25,8 +40,13 @@ def detail(request, game_id):
 	return render(request, 'organizer/detail.html', {'game': game})
 
 def results(request, game_id):
+	game = get_object_or_404(VideoGame, pk=game_id)
+	return render(request, 'organizer/results.html', {'game': game})
+"""
+
+"""def results(request, game_id):
 	response = "You're looking at the results of game %s."
-	return HttpResponse(response % game_id)
+	return HttpResponse(response % game_id)"""
 
 def rating(request, game_id):
 	return HttpResponse("You're rating game %s." % game_id)
