@@ -20,7 +20,9 @@ class VideoGame(models.Model):
 	def __str__(self):
 		return self.game_name
 	def was_published_recently(self):
-		return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+		#return self.pub_date >= timezone.now() - datetime.timedelta(days=1) [BUGGY CODE]
+		now = timezone.now()
+		return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
 class Review(models.Model):
 	"""This class will allow for reviews and ratings. Users will be able to save their 
