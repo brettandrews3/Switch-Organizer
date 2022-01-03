@@ -23,7 +23,7 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
 	model = VideoGame
-	template_name = 'organizer/details.html'
+	template_name = 'organizer/detail.html'
 
 	def get_queryset(self):
 		"""

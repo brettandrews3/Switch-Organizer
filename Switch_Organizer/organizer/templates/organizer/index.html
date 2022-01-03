@@ -1,8 +1,12 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'organizer/style.css' %}">
+
 {% if latest_games_added %}
 	<ul>
-		{% for game in latest_games_list %}
-			<li><a href="{% url 'organizer:detail' game.id %}">{{ game.game_name }}</a></li>
-		{% endfor % }
+	{% for game in latest_games_added %}
+		<li><a href="{% url 'organizer:detail' game.id %}">{{ game.game_name }}</a></li>
+	{% endfor %}
 	</ul>
 {% else %}
 	<p>No games are available.</p>
