@@ -1,0 +1,21 @@
+<h1>{{ game.game_name }}</h1>
+<ul>
+	{% for review in game.review_set.all %}
+		<li>{{ review.review_text }}</li>
+	{% endfor %}
+</ul>
+
+<!-- New content to create a minimal form - 12/30/21 -->
+<form action="{% url 'organizer:rate' game.id %}" method="post">
+	{% csrf_token %}
+	<fieldset>
+		<legend><h1>{{ game.game_name }}</h1></legend>
+		{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+		{% for review in game.review_set.all %}
+			<input type="radio" name="review" id="review{{ forloop.counter }}" value="{{ 
+				review.id }}">
+			<label for="review{{ forloop.counter }}">{{ review.review_text }}</label><br>
+				{% endfor %}
+	</fieldset>
+	<input type="submit" value="Rate">
+</form>
