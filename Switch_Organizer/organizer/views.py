@@ -25,6 +25,12 @@ class DetailView(generic.DetailView):
 	model = VideoGame
 	template_name = 'organizer/details.html'
 
+	def get_queryset(self):
+		"""
+		Exclude any games that aren't published to the app yet.
+		"""
+		return VideoGame.objects.filter(pub_date__lte=timezone.now())
+
 class ResultsView(generic.DetailView):
 	model = VideoGame
 	template_name = 'organizer/results.html'

@@ -46,7 +46,7 @@ def create_game(game_name, days):
 			time = timezone.now() + datetime.timedelta(days=days)
 			return VideoGame.objects.create(game_name=game_name, pub_date=time)
 
-class GameIndexViewTests(TestCase):
+class VideoGameIndexViewTests(TestCase):   # Changed 'Game' to 'VideoGame', matching the class name.
 	def test_no_games(self):
 		"""
 		If there's no games published, show an appropriate message.
@@ -99,3 +99,24 @@ class GameIndexViewTests(TestCase):
 			response.context['latest_games_added'],
 			[game2, game1],
 		)
+
+class VideoGameDetailViewTests(TestCase):
+	def test_future_game(self):
+		"""
+		The detail view for a game with a future pub_date should return a
+		404 not found message for users.
+		"""
+		future_game = create_game(game_name='Future game.', days=5)
+		url = reverse('organizer:detail', args=(future_game.id,))
+		response = self.client.get(url)
+		self.assertEqual(response.status_code, 404)
+
+	def test_past_game(self):
+		"""
+		The detail view for any game with a past pub_date will display the
+		game's name.
+		"""
+		past_game = create_game(game_name='Past game.', days=-5)
+		url = reverse('organizer:detail', args=(past_game.id,))
+		response = self.client.get(url)
+		self.assertContains(response, past_game.game_name)
