@@ -2,9 +2,12 @@
 
 <ul>
 	{% for review in game.review_set.all %}
-		<li>{{ review.review_text }} -- {{ review.recommends }} recommend{{ review.recommends|pluralize }}
-		</li>
+		<li>{{ review.review_text }} -- {{ review.rates }} rate{{ review.rates|pluralize }}</li>
 	{% endfor %}
 </ul>
 
 <a href="{% url 'organizer.detail' game.id %}">Vote again?</a>
+
+<!--There may be some upcoming conflict with the review.rate(s) in ln 5. On 1/3/2022, I'm getting
+	error messages when I try to see the results/ratings pages on the app. I'll remove this note
+	when I find the solution. -B -->
