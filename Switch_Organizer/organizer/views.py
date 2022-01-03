@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.utils import timezone
 from django.views import generic
 
 from .models import VideoGame
@@ -12,7 +13,13 @@ class IndexView(generic.ListView):
 	context_object_name = 'latest_games_added'
 
 	def get_queryset(self):
-		return VideoGame.objects.order_by('-pub_date')[:5]
+		"""
+		Return the last 5 games I published on the app. Exclude
+		any games set to be published to the app in the future.
+		"""
+		return VideoGame.objects.filter(
+			pub_date__lte=timezone.now()
+			).order_by('-pub_date')[:5]
 
 class DetailView(generic.DetailView):
 	model = VideoGame
