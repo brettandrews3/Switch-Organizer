@@ -1,7 +1,7 @@
 import datetime
 
 from django.test import TestCase
-from django.test import SimpleTestCase
+from django.urls import reverse
 from django.utils import timezone
 
 from .models import VideoGame
@@ -35,3 +35,67 @@ class GameModelTests(TestCase):
 		time = timezone.now() - datetime.timedelta(hours=23,minutes=59, seconds=59)
 		recent_game = VideoGame(pub_date=time)
 		self.assertIs(recent_game.was_published_recently(), True)
+
+def create_game(game_name, days):
+			"""
+			Goal: create a game listing with the given 'game_name' and published
+			within the given number of 'days' offset to now. In other words, negative
+			for games published to the app in the past, positive for games with future
+			pub_date.
+			"""
+			time = timezone.now() + datetime.timedelta(days=days)
+			return VideoGame.objects.create(game_name=game_name, pub_date=time)
+
+class GameIndexViewTests(TestCase):
+	def test_no_games(self):
+		"""
+		If there's no games published, show an appropriate message.
+		"""
+		#NOTE: THIS RESPONSE ISN'T WORKING ON 1/3/2022***
+		response = self.client.get(reverse('organizer:index'))
+		self.assertEqual(response.status_code, 200)
+		self.assertContains(response, "No games are listed yet. Why not add some?")
+		self.assertQuerysetEqual(response.context['latest_games_added'], [])
+
+	def test_past_game(self):
+		"""
+		Games with a pub_date in the past are shown on the index page.
+		"""
+		game = create_game(game_name="Past game.", days=-30)
+		response = self.client.get(reverse('organizer:index'))
+		self.assertQuerysetEqual(
+			response.context['latest_games_added'],
+			[game],
+		)
+
+	def test_future_game(self):
+		"""
+		Games with a pub_date in the future aren't shown on the index page.
+		"""
+		create_game(game_name="Future game listing.", days=30)
+		response = self.client.get(reverse('organizer:index'))
+		self.assertQuerysetEqual(response.context['latest_games_added'], [])
+
+	def test_future_game_and_past_game(self):
+		"""
+		Only display past games in app, even if both past and future games exist.
+		"""
+		game = create_game(game_name="Past game.", days=-30)
+		create_game(game_name="Future game.", days=30)
+		response = self.client.get(reverse('organizer:index'))
+		self.assertQuerysetEqual(
+			response.context['latest_games_added'],
+			[game],
+		)
+
+	def test_two_past_questions(self):
+		"""
+		The games index page can display multiple games.
+		"""
+		game1 = create_game(game_name="Past game 1.", days=-30)
+		game2 = create_game(game_name="Past game 2.", days=-5)
+		response = self.client.get(reverse('organizer:index'))
+		self.assertQuerysetEqual(
+			response.context['latest_games_added'],
+			[game2, game1],
+		)
