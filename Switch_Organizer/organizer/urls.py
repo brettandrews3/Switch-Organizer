@@ -11,9 +11,9 @@ urlpatterns = [
 	# ex: /organizer/3/
 	path('<int:pk>/', views.DetailView.as_view(), name='detail'),
 	# ex: /organizer/3/results/
-	path('<int:pk>/results', views.ResultsView.as_view, name='results')
-	# ex: /organizer/3/rating/
-	path('<int:game_id>/rating/', views.rating, name='rating'),
+	path('<int:pk>/results', views.ResultsView.as_view, name='results'),
+	# ex: /organizer/3/rate/
+	path('<int:pk>/rate/', views.rate, name='rate')
 ]
 
 """
