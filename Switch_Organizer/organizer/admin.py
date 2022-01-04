@@ -6,12 +6,13 @@ from .models import VideoGame, Review
 
 class ReviewInline(admin.TabularInline):
 	model = Review
-	extra = 1
+	#extra = 1
 
 class VideoGameAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None, {'fields': ['game_name']}),
-		('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
+		(None, {'fields': ['game_name', 'genre', 'developer', 'publisher',
+			'game_console']}),
+		('Date information', {'fields': ['release_date', 'pub_date'], 'classes': ['collapse']}),
 	]
 	inlines = [ReviewInline]
 
