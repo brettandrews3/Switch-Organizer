@@ -3,11 +3,11 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'organizer:vote' game.id %}" method="post">
+<form action="{% url 'organizer:results' game.id %}" method="post">
 	{% csrf_token %}
 	{% for review in game.review_set.all %}
 		<input type="radio" name="review" id="review{{ forloop.counter }}" value="{{ review.id }}">
 		<label for="review{{ forloop.counter }}">{{ review.review_text }}</label><br>
 	{% endfor %}
-	<input type="submit" value="Vote">
+	<input type="submit" value="Review">
 </form>

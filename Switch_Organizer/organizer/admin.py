@@ -16,6 +16,7 @@ class VideoGameAdmin(admin.ModelAdmin):
 	inlines = [ReviewInline]
 
 	list_display = ('game_name', 'genre', 'developer', 'release_date')
+	search_fields = ['game_name', 'release_date', 'genre', 'developer', 'game_console']
 	#list_filter = ['release_date']
 
 admin.site.register(VideoGame, VideoGameAdmin)
