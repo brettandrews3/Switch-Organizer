@@ -19,7 +19,7 @@ class IndexView(generic.ListView):
 		"""
 		return VideoGame.objects.filter(
 			pub_date__lte=timezone.now()
-			).order_by('name', 'genre')[:5]
+			).order_by('game_name')[:5]
 
 class DetailView(generic.DetailView):
 	model = VideoGame
@@ -29,11 +29,16 @@ class DetailView(generic.DetailView):
 		"""
 		Exclude any games that aren't published to the app yet.
 		"""
-		return VideoGame.objects.filter(pub_date__lte=timezone.now())
+		#return VideoGame.objects.filter(pub_date__lte=timezone.now())
+		return VideoGame.objects.filter('game_name')
 
 class ResultsView(generic.DetailView):
 	model = VideoGame
 	template_name = 'organizer/results.html'
+
+def all_games(request):
+	game_list = VideoGame.objects.all().order_by('game_name', 'game_console')
+	return render(request, 'organizer/videogame')
 
 def rating(request, game_id):
 	return HttpResponse("You're rating game %s." % game_id)
