@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views import generic
 
-from .models import VideoGame
+from .models import *
+from .forms import VideoGameForm
 
 # Create your views here.
 
@@ -34,6 +35,16 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
 	model = VideoGame
 	template_name = 'organizer/results.html'
+
+class VideoGameCreateView(generic.CreateView):
+	model = VideoGame
+	form_class = VideoGameForm
+	success_url = reverse_lazy('game_changelist')
+
+class VideoGameUpdateView(generic.UpdateView):
+	model = VideoGame
+	form_class = VideoGameForm
+	success_url = reverse_lazy('game_changelist')
 
 """
 def index(request):
