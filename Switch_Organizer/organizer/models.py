@@ -5,7 +5,13 @@ from django.contrib import admin
 from django.db import models
 from django.utils import timezone
 
+rating_numbers=[tuple([x,x]) for x in range(1,11)]
+
 # Create your models here.
+class UserForm(forms.Form):
+	rating_number = forms.IntegerField(label="How would you rate this game (1-10)?",
+		widget=forms.Select(choices=rating_numbers))
+
 class VideoGame(models.Model):
 	"""
 	This class allows the user to enter the standard data for their
@@ -45,6 +51,9 @@ class Review(models.Model):
 	game = models.ForeignKey(VideoGame, on_delete=models.CASCADE)
 	review_text = models.CharField(max_length=1000)
 	rating = models.IntegerField(default=1)
+	def rating(self):
+		userForm = UserForm()
+		return userForm.rating_number()
 	def __str__(self):
 		return self.review_text
 
