@@ -13,7 +13,7 @@ class VideoGame(models.Model):
 	The __str__(self) will be used throughout Django's admin section.
 	"""
 	game_name = models.CharField(max_length=200)
-	release_date = models.CharField(max_length=10, default='yyyy')
+	release_date = models.CharField(max_length=4, default='yyyy')
 	pub_date = models.DateTimeField('date added to organizer', default=timezone.now)
 	developer = models.CharField(max_length=50, default='NULL')
 	publisher = models.CharField(max_length=50, default='NULL')
