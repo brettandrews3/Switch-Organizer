@@ -7,7 +7,7 @@ from .models import VideoGame, Review
 class ReviewInline(admin.TabularInline):
 	model = Review
 	#extra = 1
-
+"""
 class VideoGameAdmin(admin.ModelAdmin):
 	fieldsets = [
 		(None, {'fields': ['game_name', 'genre', 'developer', 'publisher',
@@ -21,3 +21,10 @@ class VideoGameAdmin(admin.ModelAdmin):
 	#list_filter = ['release_date']
 
 admin.site.register(VideoGame, VideoGameAdmin)
+"""
+
+@admin.register(VideoGame)
+class VideoGameAdmin(admin.ModelAdmin):
+	list_display = ('game_name', 'genre', 'developer', 'publisher', 'game_console')
+	ordering = ('game_name',)
+	search_fields = ('game_name', 'game_console', 'release_date', 'genre', 'developer')
