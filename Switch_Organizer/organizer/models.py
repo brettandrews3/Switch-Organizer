@@ -1,5 +1,6 @@
 import datetime
 
+from django import forms
 from django.contrib import admin
 from django.db import models
 from django.utils import timezone
@@ -48,13 +49,9 @@ class Review(models.Model):
 		return self.review_text
 
 """
-class Choice(models.Model):
-	TODO: This class will allow for reviews and ratings by the time of project
-	completion. Users will be able to save their thoughts on the game and rate
-	the game on a scale of 1-10. For this initial code draft, I'm using the 
-	Django poll tutorial's fields as placeholders while I figure this out.
-	
-	question = models.ForeignKey(VideoGame, on_delete=models.CASCADE)
-	choice_text = models.CharField(max_length=1000)
-	votes = models.IntegerField(default=0)
+Here's where I'm going to draft my drop-down lists for use in genre, game_console,
+and rating. For the sake of order, I'm going to try putting the lists down here first
+so that I don't have to stack them above the classes. I'll move the lists to the top
+of the file if I need to.
 """
+
