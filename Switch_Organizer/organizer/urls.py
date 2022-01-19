@@ -1,11 +1,19 @@
+from django.contrib import admin
 from django.urls import path
 from . import views
+
+# Adding custom site header, title, index title to the app:
+admin.site.site_header = "Video Game Organizer"
+admin.site.site_title = "Game Organizer"
+admin.site.index_title = "Add games. Get organized." 
 
 # urlpatterns simplifies the web address system for the app
 
 app_name = 'organizer'
 
 urlpatterns = [
+	# custom admin site to load the site titles, header defined above:
+	path('admin/', admin.site.urls),
 	# ex: /organizer/
 	path('', views.IndexView.as_view(), name='index'),
 	# ex: /organizer/3/
