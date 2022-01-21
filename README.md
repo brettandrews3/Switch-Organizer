@@ -35,6 +35,13 @@ The app lists the games in alphabetical order, though you can order them by the 
 There's no graphics for game art or a non-admin site yet; I hope to add these items in the future. If you can
 write these features into the code, be my guest. The license should allow for other GitHub users to make edits.
 
+## Planned additions
+- Create drop-down menus for game_console, release_date, rating (1-10 scale)
+- Confirm that app can run on Windows and Mac (developed and tested on Linux)
+- Change review_text window to be more user-friendly (text in box that's 5-10 lines deep)
+- Option to add image of game art OR find an API that can match game art to game name (a la GameFAQs)
+- Create a book organizer that can live independently or in the same organizer program
+
 ## Signing Off
 Thanks so much for checking out my coding project here. I'm tremendously proud of this project and hope to continue
 adding features to it as I gain more coding experience. Email me at brettandrews3@gmail.com if you've got any 
