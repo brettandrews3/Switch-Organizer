@@ -9,6 +9,14 @@ using Django 4.0 and Python 3.9.7.
 ## Installation
 Clone the repo down to your local machine with this command:
    <b> *git clone https://github.com/brettandrews3/Switch-Organizer.git*</b>
+  
+In order to launch the program properly, you'll need to have Django and Python installed on your
+machine:
+
+- Install Python Virtual Environment (Win): https://mothergeo-py.readthedocs.io/en/latest/development/how-to/venv-win.html
+- After installing and launching the virtual environment from the command prompt, open your terminal and
+  navigate into the project files. Run this command on the command line: 
+  <b>>pip install django</b>
 
 From your terminal, navigate to the file with the manage.py file:
     cd Switch-Organizer/Switch_Organizer (this directory holds the manage.py file)
