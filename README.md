@@ -10,7 +10,7 @@ using Django 4.0 and Python 3.9.7.
 Clone the repo down to your local machine with this command:
    <b> *git clone https://github.com/brettandrews3/Switch-Organizer.git*</b>
   
-In order to launch the program properly, you'll need to have Django and Python installed on your
+In order to launch the program properly, you'll need to have Django, virtualenv, and Python installed on your
 machine:
 
 - Install Python Virtual Environment (Win): https://mothergeo-py.readthedocs.io/en/latest/development/how-to/venv-win.html
@@ -55,4 +55,4 @@ Thanks so much for checking out my coding project here. I'm tremendously proud o
 adding features to it as I gain more coding experience. Email me at brettandrews3@gmail.com if you've got any 
 questions or comments. Take care.
 
-Brett - January 21, 2022
+Brett - February 2, 2022
